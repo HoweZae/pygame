@@ -2,6 +2,24 @@ import pygame
 import time
 import random
 
+# SNAKE CLASS (to be continued)
+class Snake:
+    def __init__(self, color, size, body, bodylength, x, y):
+        self.color = color
+        self.size = size
+        self.body = body
+        self.bodylength = bodylength
+        self.x = x
+        self.y = y
+
+    def render(self):
+        for e in self.body:
+            pass
+
+    def lengthen(self):
+        self.size += 1
+        pass
+
 # INITIALIZATION OF GLOBAL CONSTANTS
 # colors:
 c_white = (255,255,255)
@@ -39,7 +57,7 @@ pygame.display.set_caption('Snake by HoweZae')
 # INITIALIZATION OF GAME PARAMETERS
 CLOCK = pygame.time.Clock()
 SCREEN = pygame.display.set_mode((scr_width, scr_height))
-FONT_DEFAULT = pygame.font.SysFont("SF Mono", 18, bold=True)
+FONT_DEFAULT = pygame.font.SysFont("SF Mono", 18, bold = True)
 
 # GAME FUNCTIONS
 def message(type, s):
@@ -47,6 +65,11 @@ def message(type, s):
     msg = FONT_DEFAULT.render(s, True, color)
     SCREEN.blit(msg, [x, y])
     pygame.display.update()
+
+def generateFood():
+    x = (random.randint(20, (scr_width-s_size) // 20) * 19) + 5
+    y = (random.randint(20, (scr_height-s_size) // 20) * 19) + 5
+    return x, y
 
 # GAME MAIN
 def main():
@@ -57,12 +80,9 @@ def main():
 
     s_score = 0
     s_bodylength = 1
-    s_foodx = (random.randint(0, (scr_width-s_size) // 20) * 20) + 5
-    s_foody = (random.randint(0, (scr_height-s_size) // 20) * 20) + 5
+    s_foodx, s_foody = generateFood()
 
     s_body = []
-
-    print(s_foodx, s_foody)
 
     while True:
         # quit option
@@ -74,13 +94,17 @@ def main():
 
             if event.type == pygame.KEYDOWN:
                 if (event.key == pygame.K_a):
-                    s_dx, s_dy = -s_speed, 0
+                    s_dx = -s_speed
+                    s_dy = 0
                 elif (event.key == pygame.K_d):
-                    s_dx, s_dy = s_speed, 0
+                    s_dx = s_speed
+                    s_dy = 0
                 elif (event.key == pygame.K_w):
-                    s_dx, s_dy = 0, -s_speed
+                    s_dx = 0
+                    s_dy = -s_speed
                 elif (event.key == pygame.K_s):
-                    s_dx, s_dy = 0, s_speed
+                    s_dx = 0
+                    s_dy = s_speed
                 elif (event.key == pygame.K_ESCAPE):
                     pygame.quit()
                     quit()
@@ -103,13 +127,17 @@ def main():
         # INITIALIZATION OF GRAPHICS
         SCREEN.fill(c_bg)
         message("score", "Score: " + str(s_score))
+
+        # draw food
         pygame.draw.rect(SCREEN, c_food, [s_foodx, s_foody, s_foodsize, s_foodsize])
 
+        # draw snake; inefficient, should use classes
         for x,y in s_body:
             pygame.draw.rect(SCREEN, c_snake, [x, y, s_size, s_size])
 
         # score condition
         if (s_posx in range(s_foodx - s_size//2 - 1, s_foodx)) and (s_posy in range(s_foody - s_size//2 - 1, s_foody)):
+            s_foodx, s_foody = generateFood()
             s_score += 1
             s_bodylength += 1
 
