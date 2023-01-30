@@ -1,8 +1,16 @@
 import pygame
 import sys
 
+from vardata import *
+
 pygame.init()
-SCREEN = pygame.display.set_mode((640, 480))
+
+windowW = 640
+windowH = 480
+WINDOW = pygame.display.set_mode((windowW, windowH), pygame.HWSURFACE | pygame.DOUBLEBUF)
+CLOCK = pygame.time.Clock()
+
+screen = pygame.surface.Surface((320, 240))
 
 def main():
     while True:
@@ -10,7 +18,12 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-        SCREEN.fill((0,255,255))
-        pygame.display.flip()
+
+        screen.fill('white')
+        pygame.draw.rect(screen, (108, 207, 246), [20, 20, 20, 20])
+
+        WINDOW.blit(pygame.transform.scale(screen, (windowW, windowH)), (0, 0))
+        pygame.display.update()
+        CLOCK.tick(60)
 
 main()

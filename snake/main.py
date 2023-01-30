@@ -5,12 +5,8 @@ import random
 # SNAKE CLASS (to be continued)
 class Snake:
     def __init__(self, color, size, body, bodylength, x, y):
-        self.color = color
-        self.size = size
-        self.body = body
-        self.bodylength = bodylength
-        self.x = x
-        self.y = y
+        self.image = pygame.Surface([])
+        self.fill(color)
 
     def render(self):
         for e in self.body:
