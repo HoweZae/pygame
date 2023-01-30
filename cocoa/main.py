@@ -1,7 +1,8 @@
 import pygame
 import sys
 
-from vardata import *
+from scripts.classes import *
+from scripts.variables import *
 
 pygame.init()
 
@@ -22,6 +23,7 @@ def main():
         screen.fill('white')
         pygame.draw.rect(screen, (108, 207, 246), [20, 20, 20, 20])
 
+        #rendering
         WINDOW.blit(pygame.transform.scale(screen, (windowW, windowH)), (0, 0))
         pygame.display.update()
         CLOCK.tick(60)

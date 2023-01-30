@@ -2,58 +2,16 @@ import pygame
 import time
 import random
 
-# SNAKE CLASS (to be continued)
-class Snake:
-    def __init__(self, color, size, body, bodylength, x, y):
-        self.image = pygame.Surface([])
-        self.fill(color)
-
-    def render(self):
-        for e in self.body:
-            pass
-
-    def lengthen(self):
-        self.size += 1
-        pass
-
-# INITIALIZATION OF GLOBAL CONSTANTS
-# colors:
-c_white = (255,255,255)
-c_richblack = (0, 16, 17)
-c_babyblue = (108, 207, 246)
-c_lightgreen = (145, 245, 173)
-c_lavender = (108, 207, 246)
-
-c_snake = c_lightgreen
-c_food = c_babyblue
-c_bg = c_richblack
-c_contrast = (abs(255-c_bg[0]), abs(255-c_bg[1]), abs(255-c_bg[2]))
-c_text = c_white
-
-# screen size:
-scr_width = 640
-scr_height = 480
-
-# snake/game:
-s_size = 20
-s_speed = 10
-s_foodsize = 10
-
-# message
-# UNOPTIMIZED; find a way to do this that does not make use of strings as keys
-msg_types = {
-    "lose": (c_text, scr_width//2, scr_height//2),
-    "score": (c_text, 0, 0),
-    "update": (c_text, 540, 0)
-}
+from variables import *
 
 pygame.init()
 pygame.display.set_caption('Snake by HoweZae')
 
 # INITIALIZATION OF GAME PARAMETERS
 CLOCK = pygame.time.Clock()
-SCREEN = pygame.display.set_mode((scr_width, scr_height))
-FONT_DEFAULT = pygame.font.SysFont("SF Mono", 18, bold = True)
+WINDOW = pygame.display.set_mode((scr_width*2, scr_height*2), pygame.HWSURFACE | pygame.DOUBLEBUF)
+SCREEN = pygame.surface.Surface((scr_width, scr_height))
+FONT_DEFAULT = pygame.font.SysFont("SF Mono", 9, bold = True)
 
 # GAME FUNCTIONS
 def message(type, s):
@@ -63,8 +21,8 @@ def message(type, s):
     pygame.display.update()
 
 def generateFood():
-    x = (random.randint(20, (scr_width-s_size) // 20) * 19) + 5
-    y = (random.randint(20, (scr_height-s_size) // 20) * 19) + 5
+    x = (random.randint(10, (scr_width-s_size) // 10) * 10)
+    y = (random.randint(10, (scr_height-s_size) // 10) * 10)
     return x, y
 
 # GAME MAIN
@@ -115,8 +73,9 @@ def main():
             del s_body[0]
 
         # lose condition
-        if (s_posx >= scr_width - s_size//2 or s_posx <= 0) or (s_posy >= scr_height - s_size//2 or s_posy <= 0) or ((s_posx,s_posy) in s_body[:-1:]):
+        if (s_posx >= scr_width or s_posx <= 0) or (s_posy >= scr_height or s_posy <= 0):
             message("lose", "FINAL SCORE: " + str(s_score))
+            print(s_posx, s_posy)
             time.sleep(2)
             break
 
@@ -138,6 +97,7 @@ def main():
             s_bodylength += 1
 
         # GAME UPDATE
+        WINDOW.blit(pygame.transform.scale(SCREEN, (scr_width, scr_height)), (0, 0))
         pygame.display.update()
         CLOCK.tick(30)
 
