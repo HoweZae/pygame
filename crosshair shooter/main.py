@@ -23,7 +23,7 @@ pygame.mouse.set_visible(False)
 
 def main():
     # BACKGROUND
-    grass = pygame.image.load("crosshair shooter\grass.png")
+    grass = pygame.image.load("crosshair shooter\images\grass.png")
     for x in range(0, 320, 32):
         for y in range(0, 240, 32):
             screen.blit(grass, (x, y))
