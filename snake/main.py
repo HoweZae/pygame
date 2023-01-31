@@ -10,7 +10,7 @@ pygame.display.set_caption('Snake by HoweZae')
 # INITIALIZATION OF GAME PARAMETERS
 CLOCK = pygame.time.Clock()
 WINDOW = pygame.display.set_mode((scr_width*2, scr_height*2), pygame.HWSURFACE | pygame.DOUBLEBUF)
-SCREEN = pygame.surface.Surface((scr_width, scr_height))
+SCREEN = pygame.Surface((scr_width, scr_height))
 FONT_DEFAULT = pygame.font.SysFont("SF Mono", 9, bold = True)
 
 # GAME FUNCTIONS
