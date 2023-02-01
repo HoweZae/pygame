@@ -1,8 +1,6 @@
 import pygame, sys
 import random
 
-from script.classes import *
-
 pygame.init()
 CLOCK = pygame.time.Clock()
 
@@ -10,6 +8,8 @@ CLOCK = pygame.time.Clock()
 WINDOW = pygame.display.set_mode((640, 480), pygame.HWSURFACE | pygame.DOUBLEBUF)
 screen = pygame.Surface((320, 240))
 pygame.mouse.set_visible(False)
+
+from script.classes import *
 
 def main():
     # BACKGROUND INITIALIZATION
