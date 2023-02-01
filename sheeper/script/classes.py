@@ -12,7 +12,7 @@ class Crosshair(pygame.sprite.Sprite):
         pass
 
 class Sheep(pygame.sprite.Sprite):
-    state_dict = {
+    frames = {
         0: (0,0,20,16),     # 1
         1: (20,0,40,16),    # 2
         2: (40,0,60,16),    # 3
@@ -26,28 +26,28 @@ class Sheep(pygame.sprite.Sprite):
     
     def __init__(self, pos):
         super().__init__()
-        self.state = 0
+        self.tick = 0
+        self.frame = 0
 
         image = pygame.Surface((20,16), pygame.SRCALPHA)
-        image.blit(self.source, (0,0), self.state_dict[int(self.state)])
+        image.blit(self.source, (0,0), self.frames[0])
         self.image = image
 
         self.rect = self.image.get_rect()
         self.rect.topleft = pos
 
     def update(self):
-        self.state += 0.2
-        if self.state > 7:
-            self.state = 0
-        
-        state = int(self.state)
+        self.tick += 1
+
+        frame = (self.tick // 6) % 8
 
         image = pygame.Surface((20,16), pygame.SRCALPHA)
-        image.blit(self.source, (0,0), self.state_dict[state])
+        image.blit(self.source, (0,0), self.frames[frame])
         self.image = image
-        
-        # if state % 2 == 0:
-        self.rect.left += 1
+
+        if frame != self.frame:
+            self.rect.left += 1
+            self.frame = frame
 
     def changeDir(self):
         pass
