@@ -17,7 +17,8 @@ def main():
 
     # SHEEP INITIALIZATION
     sheep_group = pygame.sprite.Group()
-    for i in range(8):
+    sheep_count = 8
+    for i in range(sheep_count):
         sheep_group.add(Sheep((random.randrange(1,16-1)*20, random.randrange(1,15-1)*16)))
 
     # CROSSHAIR INITIALIZATION
@@ -30,12 +31,19 @@ def main():
                 pygame.quit()
                 sys.exit()
 
-        # EVERYTHING DISPLAY RELATED
+        # RENDER BACKGROUND
         for x in range(0, 324, 81):
             for y in range(0, 243, 81):
                 screen.blit(grass, (x, y))
+        
+        # RENDER SHEEPS
+        for i in range(1,sheep_count):
+            if i % 2 == 0:
+                sheep_group.sprites()[i].walkRight()
+            else:
+                sheep_group.sprites()[i].walkLeft()
 
-        sheep_group.update()
+        # RENDER EVERYTHING ELSE
         sheep_group.draw(screen)
 
         WINDOW.blit(pygame.transform.scale_by(screen, 2), (0, 0))
