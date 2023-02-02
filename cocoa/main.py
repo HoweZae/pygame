@@ -1,7 +1,7 @@
 import pygame
 import sys
 
-from scripts.classes import *
+from scripts.sprites import *
 from scripts.variables import *
 
 pygame.init()
