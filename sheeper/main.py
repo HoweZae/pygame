@@ -14,6 +14,10 @@ from script.classes import *
 def main():
     # BACKGROUND INITIALIZATION
     grass = pygame.image.load("sheeper\images\grass.png")
+    grass_bg = pygame.Surface((320,240))
+    for x in range(0, 324, 81):
+        for y in range(0, 243, 81):
+            grass_bg.blit(grass, (x, y))
 
     # SHEEP INITIALIZATION
     sheep_group = pygame.sprite.Group()
@@ -32,9 +36,7 @@ def main():
                 sys.exit()
 
         # RENDER BACKGROUND
-        for x in range(0, 324, 81):
-            for y in range(0, 243, 81):
-                screen.blit(grass, (x, y))
+        screen.blit(grass_bg, (0,0))
         
         # RENDER SHEEPS
         for i in range(1,sheep_count):
