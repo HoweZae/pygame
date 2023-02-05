@@ -18,6 +18,10 @@ player_group = pygame.sprite.Group(player)
 def main():
     vel_x = 0
     vel_y = 0
+    press_w = False
+    press_s = False
+    press_a = False
+    press_d = False
 
     # MAIN GAME LOOP
     while True:
@@ -28,29 +32,38 @@ def main():
 
             elif event.type == pygame.KEYDOWN:
                 if (event.key == pygame.K_w):
+                    press_w = True
                     vel_y += 1
                     player.moving = True
                 if (event.key == pygame.K_s):
+                    press_s = True
                     vel_y -= 1
                     player.moving = True
                 if (event.key == pygame.K_a):
+                    press_a = True
                     vel_x -= 1
                     player.moving = True
                     player.lookingLeft = True
                 if (event.key == pygame.K_d):
+                    press_d = True
                     vel_x += 1
                     player.moving = True
                     player.lookingLeft = False
-                if (event.key == pygame.K_ESCAPE):
-                    pygame.quit()
-                    quit()
 
             elif event.type == pygame.KEYUP:
-                player.idle()
-                vel_x = 0
-                vel_y = 0
+                if (event.key == pygame.K_w):
+                    press_w = False
+                if (event.key == pygame.K_s):
+                    press_s = False
+                if (event.key == pygame.K_a):
+                    press_a = False
+                if (event.key == pygame.K_d):
+                    press_d = False
 
         screen.fill(c_gray)
+
+        if not (press_w or press_s or press_a or press_d):
+            player.idle()
 
         player_group.update()
         player_group.draw(screen)
