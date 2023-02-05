@@ -18,7 +18,7 @@ class Spritesheet(pygame.sprite.Sprite):
         return image
 
 class Player(Spritesheet):
-    def __init__(self, pos):
+    def __init__(self, x, y):
         fli = (
             (0,0,25,27),
             (25,0,50,27),
@@ -34,7 +34,9 @@ class Player(Spritesheet):
         super().__init__("cocoa\images\office frog.png", 25, 27, fli)
         self.image = super().get_image(0, False)
         self.rect = self.image.get_rect()
-        self.rect.center = pos
+        self.rect.center = (160, 120)
+        self.x = x
+        self.y = y
 
         self.momentum = 0
 
