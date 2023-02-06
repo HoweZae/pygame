@@ -5,7 +5,7 @@ import sys
 # from pytmx.util_pygame import load_pygame
 # tmx_data = load_pygame("cocoa\config\office.tmx")
 
-from modules.sprites import *
+from modules.sprites import Player
 from modules.variables import *
 
 pygame.init()
