@@ -2,6 +2,8 @@ import pygame, sys
 
 from config import *
 from level import Level
+from tile import Tile
+from player import Player
 
 class Game:
     def __init__(self):
