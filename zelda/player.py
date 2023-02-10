@@ -1,6 +1,6 @@
-
+# carbon copy of tile.py
 import pygame
-from config import *
+from settings import *
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, group):

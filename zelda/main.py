@@ -1,6 +1,6 @@
 import pygame, sys
 
-from config import *
+from settings import *
 from level import Level
 from tile import Tile
 from player import Player
