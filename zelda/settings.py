@@ -1,0 +1,8 @@
+SCREEN_W = 540
+SCREEN_H = 360
+FPS = 60
+TILESIZE = 32
+
+MAP = [
+    
+]
