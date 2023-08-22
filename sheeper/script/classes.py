@@ -7,6 +7,8 @@ class Spritesheet(pygame.sprite.Sprite):
         self.sheet = pygame.image.load(imgpath).convert_alpha()
         self.frame_dict = frame_dict
         self.size = (w,h)
+        self.tick = 0
+        self.frame = 0
 
     def get_image(self, frame):
         image = pygame.Surface(self.size, pygame.SRCALPHA)
@@ -35,12 +37,7 @@ class Sheep(Spritesheet):
             3: (40, 0, 60, 16)
         }
         super().__init__("sheeper\images\sheepwalk.png", 20, 16, frame_dict)
-
-        self.tick = 0
-        self.frame = 0
-
         self.image = super().get_image(frame = 0)
-
         self.rect = self.image.get_rect()
         self.rect.topleft = pos
 
@@ -49,22 +46,16 @@ class Sheep(Spritesheet):
 
     def walkRight(self):
         self.tick += 1
-
         frame = (self.tick // 6) % 4
-
         self.image = super().get_image(frame)
-
         if (frame != self.frame):
             self.rect.left += 1
             self.frame = frame
 
     def walkLeft(self):
         self.tick += 1
-
         frame = (self.tick // 6) % 4
-        
         self.image = pygame.transform.flip(super().get_image(frame), True, False)
-
         if (frame != self.frame):
             self.rect.left -= 1
             self.frame = frame
